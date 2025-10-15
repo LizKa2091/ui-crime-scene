@@ -45,7 +45,7 @@ const crimeSlice = createSlice({
 
             const allFound =
                state.errors.length > 0 &&
-               state.errors.every((errId) => state.foundErrors.includes(errId));
+               state.errors.every((err) => state.foundErrors.includes(err.id));
 
             if (allFound) {
                state.isComplete = true;
