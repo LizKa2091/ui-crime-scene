@@ -1,12 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-import modalReducer from "./modalSlice";
-import { useDispatch, useSelector, type TypedUseSelectorHook } from "react-redux";
+import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch, useSelector, type TypedUseSelectorHook } from 'react-redux';
+import modalReducer from './modalSlice';
+import crimeReducer from './crimeSlice';
 
 export const store = configureStore({
    reducer: {
-      modal: modalReducer
+      modal: modalReducer,
+      crime: crimeReducer
    }
-})
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 
