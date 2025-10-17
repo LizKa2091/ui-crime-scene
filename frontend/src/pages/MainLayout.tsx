@@ -3,28 +3,22 @@ import HeaderBar from '../components/HeaderBar/HeaderBar';
 import Sider from 'antd/es/layout/Sider';
 import { Content } from 'antd/es/layout/layout';
 import ModalPortal from '../components/ModalPortal/ModalPortal';
-import { useAppDispatch } from '../store/store';
-import { showModal } from '../store/modalSlice';
+import CrimeHint from '../components/CrimeHint/CrimeHint';
 
 interface IMainLayoutProps {
    children: ReactNode;
 }
 
 const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
-   const dispatch = useAppDispatch();
-
-   const handleModal = () => {
-      dispatch(showModal('hint'));
-   }
-
    return (
       <>
          <HeaderBar />
          <Content>{children}</Content>
          <Sider>
-            <button onClick={handleModal}>открыть модалку</button>
+            <CrimeHint errorId={0} description={''}>
+               <p style={{ color: 'white' }}>я ошибка</p>
+            </CrimeHint>
             <ModalPortal />
-            <div id='modal-result' />
          </Sider>
       </>
    )

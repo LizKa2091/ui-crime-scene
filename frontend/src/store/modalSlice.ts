@@ -3,14 +3,20 @@ import { createSlice } from '@reduxjs/toolkit';
 const modalSlice = createSlice({
    name: 'modal',
    initialState: {
-      activeModal: null
+      activeModal: null,
+      modalData: null
    },
    reducers: {
       showModal: (state, action) => {
-         state.activeModal = action.payload
+         state.activeModal = action.payload.activeModal;
+
+         if (action.payload.modalData !== undefined) {
+            state.modalData = action.payload.modalData;
+         }
+         
       },
       hideModal: (state) => {
-         state.activeModal = null
+         state.activeModal = null;
       }
    }
 })
