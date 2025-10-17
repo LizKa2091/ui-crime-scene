@@ -1,47 +1,48 @@
-import { useEffect, useState, type FC } from 'react';
+import { type FC } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
+import { Flex } from 'antd';
+
 import { hideModal } from '../../store/modalSlice';
 import { type modalType } from '../../types/modalTypes';
 import { useAppSelector } from '../../store/store';
 
+import styles from './ModalPortal.module.scss';
+
 const ModalPortal: FC = () => {
-   const [portalEl, setPortalEl] = useState<HTMLElement | null>(null);
+   const aside = document.querySelector('.ant-layout-sider');
    const dispatch = useDispatch();
 
-   useEffect(() => {
-      const aside = document.getElementById('modal-result');
-      setPortalEl(aside);
+   const currModalType: modalType = useAppSelector((state) => state.modal.activeModal);
+   const modalData: string | null = useAppSelector((state) => state.modal.modalData);
 
-      const handleClickOutside = (e: MouseEvent) => {
-         if (aside && aside.contains(e.target as Node)) dispatch(hideModal());
-      }
-
-      document.addEventListener('mousedown', handleClickOutside); 
-
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-   }, [dispatch]);
-
-   const currModalType: modalType = useAppSelector((state) => state.modal.activeModal)
-
-   if (!currModalType || !portalEl) return null;
+   if (!currModalType || !aside) return null;
 
    const displayMessage = () => {
       switch (currModalType) {
          case 'completeScene': 
-            return <p>Дело успешно раскрыто!</p>
+            return <p>Дело успешно раскрыто!</p>;
          case 'hint':
-            return <p>Подсказка</p>
+            return (
+               <Flex vertical>
+                  <h3>Преступление найдено!</h3>
+                  <p>{modalData}</p>
+               </Flex>
+            );
          case 'about':
-            return <p>Добро пожаловать в UI Crime Scene. Найди все UX-преступления!</p>
+            return <p>Добро пожаловать в UI Crime Scene. Найди все UX-преступления!</p>;
          default: 
-            return null
+            return null;
       }
    }
 
-   return (
-      createPortal(<div className='modal-portal'>{displayMessage()}</div>, portalEl)
-   )
+   return createPortal(
+      <div onClick={() => dispatch(hideModal())} className={styles.modalOverlay}>
+         <div onClick={(e) => e.stopPropagation()} className={styles.modalContainer}>
+            {displayMessage()}
+         </div>
+      </div>, 
+   aside)
 }
 
 export default ModalPortal;
