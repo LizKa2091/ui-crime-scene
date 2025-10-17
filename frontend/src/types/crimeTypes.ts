@@ -17,5 +17,6 @@ export interface ISceneProgress {
 
 export interface IErrorItem {
    id: number;
+   element: string;
    description: string;
 }
