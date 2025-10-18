@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { ICrimeState } from '../types/crimeTypes';
+import { crimeErrors } from '../data/crimeData';
 
 const initialState: ICrimeState = {
    currScene: null,
@@ -23,16 +24,14 @@ const crimeSlice = createSlice({
 
          state.currScene = sceneId;
 
-         // TODO: upload errors for scene
-         state.errors = [];
+         const sceneName = state.scenesProgress.find(scene => scene.id === sceneId)?.sceneName;
+         state.errors = sceneName ? crimeErrors[sceneName] : [];
 
          state.foundErrors = [];
          state.foundCount = 0;
          state.isComplete = false;
 
-         const scene = state.scenesProgress.find(
-            (scene) => scene.id === sceneId
-         );
+         const scene = state.scenesProgress.find((scene) => scene.id === sceneId);
 
          if (scene) scene.status = 'in progress';
       },
