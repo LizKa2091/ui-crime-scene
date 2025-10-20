@@ -1,10 +1,8 @@
 import { type FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import LoginScene from './pages/scenes/LoginScene';
-import ShopScene from './pages/scenes/ShopScene';
-import BlogScene from './pages/scenes/BlogScene';
 import MainLayout from './pages/MainLayout';
+import ScenePage from './pages/scenes/ScenePage';
 
 const App: FC = () => {
    return (
@@ -18,26 +16,10 @@ const App: FC = () => {
             }
          />
          <Route
-            path="/scene/login"
+            path="/scene/:sceneName"
             element={
                <MainLayout>
-                  <LoginScene />
-               </MainLayout>
-            }
-         />
-         <Route
-            path="/scene/shop"
-            element={
-               <MainLayout>
-                  <ShopScene />
-               </MainLayout>
-            }
-         />
-         <Route
-            path="/scene/blog"
-            element={
-               <MainLayout>
-                  <BlogScene />
+                  <ScenePage />
                </MainLayout>
             }
          />
