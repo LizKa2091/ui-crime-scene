@@ -1,0 +1,12 @@
+.card {
+   width: clamp(150px, 100%, 250px);
+
+   &Button {
+      width: 100%;
+   }
+   :global {
+      .ant-card-head-title {
+         font-size: 18px;
+      }
+   }
+}
