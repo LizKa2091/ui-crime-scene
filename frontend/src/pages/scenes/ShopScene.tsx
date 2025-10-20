@@ -1,11 +1,14 @@
-import { type FC } from 'react';
+import { useEffect, type FC } from 'react';
 import { Flex } from 'antd';
 import { useAppDispatch } from '../../store/store';
 import { markFoundError, setScene } from '../../store/crimeSlice';
 
 const ShopScene: FC = () => {
    const dispatch = useAppDispatch();
-   dispatch(setScene('shop'));
+   
+   useEffect(() => {
+      dispatch(setScene({ sceneId: 2 }));
+   }, [dispatch]);
 
    const handleErrorClick = () => {
       dispatch(markFoundError({ errorId: 1 }));
