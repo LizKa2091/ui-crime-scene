@@ -1,4 +1,5 @@
 export type currScene = 'login' | 'shop' | 'blog' | null;
+export type sceneStatus = 'new' | 'in progress' | 'complete';
 
 export interface ICrimeState {
    currScene: number | null;
@@ -12,7 +13,7 @@ export interface ICrimeState {
 export interface ISceneProgress {
    id: number;
    sceneName: string;
-   status: 'new' | 'in progress' | 'complete';
+   status: sceneStatus;
 }
 
 export interface IErrorItem {
