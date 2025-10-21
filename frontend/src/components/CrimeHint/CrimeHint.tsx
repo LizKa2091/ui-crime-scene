@@ -1,28 +1,30 @@
 import { type FC, type ReactNode } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { markFoundError } from '../../store/crimeSlice';
 import { showModal } from '../../store/modalSlice';
-import { useAppSelector } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 
 import styles from './CrimeHint.module.scss';
 
 interface ICrimeHintProps {
    errorId: number;
-   description: string;
    children: ReactNode;
 }
 
-const CrimeHint: FC<ICrimeHintProps> = ({ errorId, description, children }) => {
-   const dispatch = useDispatch();
-   const foundErrors = useAppSelector((state) => state.crime.foundErrors);
+const CrimeHint: FC<ICrimeHintProps> = ({ errorId, children }) => {
+   const dispatch = useAppDispatch();
+   const { errors, foundErrors } = useAppSelector((state) => state.crime);
+
+   const errorData = errors.find((err) => err.id === errorId);
+   const errDesc = errorData?.description || '';
 
    const handleHintClick = () => {
       const isNewError = !foundErrors.includes(errorId);
+
       dispatch(markFoundError(errorId));
 
-      if (isNewError) {
-         dispatch(showModal({ activeModal: 'hint', modalData: description }));
+      if (isNewError && errDesc) {
+         dispatch(showModal({ activeModal: 'hint', modalData: errDesc }));
       }
    }
 
