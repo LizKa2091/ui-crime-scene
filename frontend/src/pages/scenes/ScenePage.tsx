@@ -8,7 +8,7 @@ import { setScene } from '../../store/crimeSlice';
 import { getSceneIdByName } from '../../utils/getSceneIdByName';
 
 const scenes = {
-   login: lazy(() => import('../../components/scenes/LoginScene')),
+   login: lazy(() => import('../../components/scenes/LoginScene/LoginScene')),
    shop: lazy(() => import('../../components/scenes/ShopScene')),
    blog: lazy(() => import('../../components/scenes/BlogScene'))
 }
@@ -43,11 +43,9 @@ const ScenePage: FC = () => {
    const CurrScene = scenes[sceneName as keyof typeof scenes];
 
    return (
-      <div>
-         <Suspense fallback={<p>Загрузка...</p>}>
-            <CurrScene />
-         </Suspense>
-      </div>
+      <Suspense fallback={<p>Загрузка...</p>}>
+         <CurrScene />
+      </Suspense>
    )
 }
 

@@ -3,3 +3,14 @@
    padding: 0;
    box-sizing: border-box;
 }
+
+.sceneContainer {
+   width: clamp(200px, 100%, 500px);
+}
+
+.ant-layout-content {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 25px 0;
+}
