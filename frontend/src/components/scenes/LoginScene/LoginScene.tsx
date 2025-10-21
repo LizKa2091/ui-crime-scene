@@ -1,6 +1,8 @@
 import { useState, type FC } from 'react';
 import { Button, Flex, Form, Input } from 'antd';
 
+import CrimeHint from '../../CrimeHint/CrimeHint';
+
 import styles from './LoginScene.module.scss';
 
 interface IFormData {
@@ -38,7 +40,12 @@ const LoginScene: FC = () => {
                   hasFeedback={false}
                   validateStatus={isError ? 'error' : ''}
                >
-                  <Input placeholder='Ваш логин' className={styles.formInput} />   
+                  <CrimeHint 
+                     errorId={1} 
+                     children={
+                        <Input placeholder='Ваш логин' className={styles.formInput} />  
+                     }
+                  />
                </Form.Item>
                <Form.Item<IFormData> 
                   name='password'
@@ -55,9 +62,19 @@ const LoginScene: FC = () => {
                   gap='small' 
                   className={styles.buttonContainer}
                >
-                  <Button htmlType='submit'>Войти</Button>
+                  <CrimeHint
+                     errorId={2}
+                     children={
+                        <Button htmlType='submit'>Войти</Button>
+                     }
+                  />
                   {isError && (
-                     <p className='error-message'>Необходимо исправить ошибку</p>
+                     <CrimeHint
+                        errorId={3}
+                        children={
+                           <p className='error-message'>Необходимо исправить ошибку</p>
+                        }
+                     />
                   )}
                </Flex>
             </Form>
