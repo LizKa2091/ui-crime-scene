@@ -10,7 +10,7 @@ import { getSceneIdByName } from '../../utils/getSceneIdByName';
 const scenes = {
    login: lazy(() => import('../../components/scenes/LoginScene/LoginScene')),
    shop: lazy(() => import('../../components/scenes/ShopScene/ShopScene')),
-   blog: lazy(() => import('../../components/scenes/BlogScene'))
+   blog: lazy(() => import('../../components/scenes/BlogScene/BlogScene'))
 }
 
 const ScenePage: FC = () => {
