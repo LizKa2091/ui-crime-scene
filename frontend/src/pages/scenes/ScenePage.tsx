@@ -9,8 +9,8 @@ import { getSceneIdByName } from '../../utils/getSceneIdByName';
 
 const scenes = {
    login: lazy(() => import('../../components/scenes/LoginScene/LoginScene')),
-   shop: lazy(() => import('../../components/scenes/ShopScene')),
-   blog: lazy(() => import('../../components/scenes/BlogScene'))
+   shop: lazy(() => import('../../components/scenes/ShopScene/ShopScene')),
+   blog: lazy(() => import('../../components/scenes/BlogScene/BlogScene'))
 }
 
 const ScenePage: FC = () => {
@@ -26,10 +26,6 @@ const ScenePage: FC = () => {
          if (sceneId) dispatch(setScene({ sceneId }))
       }
    }, [dispatch, sceneName]);
-
-   // const handleErrorClick = () => {
-   //    dispatch(markFoundError({ errorId: 1 }));
-   // };
 
    if ((!sceneName || !(sceneName in crimeErrors))) {
       return (
