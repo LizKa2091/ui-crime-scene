@@ -7,16 +7,14 @@ import { hideModal } from '../../store/modalSlice';
 import { type modalType } from '../../types/modalTypes';
 import { useAppSelector } from '../../store/store';
 
-import styles from './ModalPortal.module.scss';
-
 const ModalPortal: FC = () => {
-   const aside = document.querySelector('.ant-layout-sider');
+   const footer = document.querySelector('.ant-layout-footer');
    const dispatch = useDispatch();
 
    const currModalType: modalType = useAppSelector((state) => state.modal.activeModal);
    const modalData: string | null = useAppSelector((state) => state.modal.modalData);
 
-   if (!currModalType || !aside) return null;
+   if (!currModalType || !footer) return null;
 
    const displayMessage = () => {
       switch (currModalType) {
@@ -37,12 +35,12 @@ const ModalPortal: FC = () => {
    }
 
    return createPortal(
-      <div onClick={() => dispatch(hideModal())} className={styles.modalOverlay}>
-         <div onClick={(e) => e.stopPropagation()} className={styles.modalContainer}>
+      <div onClick={() => dispatch(hideModal())}>
+         <div onClick={(e) => e.stopPropagation()}>
             {displayMessage()}
          </div>
       </div>, 
-   aside)
+   footer)
 }
 
 export default ModalPortal;
