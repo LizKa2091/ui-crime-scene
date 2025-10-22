@@ -11,7 +11,7 @@ const HomePage: FC = () => {
    return (
       <Flex justify='center' align='center'>
          {scene && 
-            <Flex vertical align='center'>
+            <Flex vertical align='center' gap='large'>
                <h2>Выберите сцену</h2>
                <SceneItem title={scene.sceneName} progress={scene.status} />
             </Flex>
