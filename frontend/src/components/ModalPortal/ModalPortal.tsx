@@ -1,10 +1,9 @@
-import { type FC } from 'react';
+import { useEffect, type FC } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { Button, Flex } from 'antd';
 
-import { hideModal } from '../../store/modalSlice';
-import { type modalType } from '../../types/modalTypes';
+import { hideModal, showModal } from '../../store/modalSlice';
 import { useAppSelector } from '../../store/store';
 
 import styles from './ModalPortal.module.scss';
@@ -13,18 +12,24 @@ const ModalPortal: FC = () => {
    const rootContainer = document.getElementById('root');
 
    const dispatch = useDispatch();
+   
+   const { activeModal, modalData } = useAppSelector((state) => state.modal);
+   const { isComplete } = useAppSelector((state) => state.crime);
 
-   const currModalType: modalType = useAppSelector((state) => state.modal.activeModal);
-   const modalData: string | null = useAppSelector((state) => state.modal.modalData);
+   useEffect(() => {
+      if (isComplete) {
+         dispatch(showModal({ activeModal: 'completeScene' }));
+      }
+   }, [isComplete, dispatch]);
 
-   if (!currModalType || !rootContainer) return null;
+   if (!activeModal || !rootContainer) return null;
 
    const handleClose = () => {
       dispatch(hideModal())
    }
 
    const displayMessage = () => {
-      switch (currModalType) {
+      switch (activeModal) {
          case 'completeScene': 
             return <p>Дело успешно раскрыто!</p>;
          case 'hint':
