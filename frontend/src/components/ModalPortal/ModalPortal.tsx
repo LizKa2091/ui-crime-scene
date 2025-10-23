@@ -16,16 +16,15 @@ const ModalPortal: FC = () => {
    const { activeModal, modalData } = useAppSelector((state) => state.modal);
    const { isComplete } = useAppSelector((state) => state.crime);
 
-   useEffect(() => {
-      if (isComplete) {
-         dispatch(showModal({ activeModal: 'completeScene' }));
-      }
-   }, [isComplete, dispatch]);
-
    if (!activeModal || !rootContainer) return null;
 
-   const handleClose = () => {
-      dispatch(hideModal())
+   const handleCloseButton = () => {
+      if (isComplete && activeModal === 'hint') {
+         dispatch(showModal({ activeModal: 'completeScene' }));
+         return;
+      }
+      
+      dispatch(hideModal());
    }
 
    const displayMessage = () => {
@@ -47,9 +46,9 @@ const ModalPortal: FC = () => {
    }
 
    return createPortal(
-      <Flex onClick={handleClose} className={styles.modalOverlay}>
+      <Flex onClick={() => dispatch(hideModal())} className={styles.modalOverlay}>
          <Flex onClick={(e) => e.stopPropagation()} className={styles.modalContainer}>
-            <Button onClick={handleClose} className={styles.modalButton}>X</Button>
+            <Button onClick={handleCloseButton} className={styles.modalButton}>X</Button>
             {displayMessage()}
          </Flex>
       </Flex>, 
