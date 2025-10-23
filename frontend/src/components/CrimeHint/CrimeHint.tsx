@@ -15,24 +15,27 @@ const CrimeHint: FC<ICrimeHintProps> = ({ errorId, children }) => {
    const dispatch = useAppDispatch();
    const { errors, foundErrors } = useAppSelector((state) => state.crime);
 
-   const [clickCounter, setClickCounter] = useState<number>(0);
+   const [_clickCounter, setClickCounter] = useState<number>(0);
 
    const errorData = errors.find((err) => err.id === errorId);
    const errDesc = errorData?.description || '';
 
    const handleHintClick = () => {
-      const isNewError = !foundErrors.includes(errorId);
-      setClickCounter((prev) => prev+1);
+      setClickCounter((prev) => {
+         const newCount = prev+1;
+         
+         if (newCount >= 3) {
+            const isNewError = !foundErrors.includes(errorId);
 
-      if (clickCounter >= 2) {
-         setClickCounter(0);
+            if (isNewError && errDesc) {
+               dispatch(markFoundError({ errorId }));
+               dispatch(showModal({ activeModal: 'hint', modalData: errDesc }));
+            }
 
-         if (isNewError && errDesc) {
-            dispatch(markFoundError(errorId));
-
-            dispatch(showModal({ activeModal: 'hint', modalData: errDesc }));
+            return 0;
          }
-      }
+         return newCount;
+      });
    }
 
    return (

@@ -1,23 +1,34 @@
-import { type FC } from 'react';
+import { useEffect, type FC } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
-import { Flex } from 'antd';
+import { Button, Flex } from 'antd';
 
-import { hideModal } from '../../store/modalSlice';
-import { type modalType } from '../../types/modalTypes';
+import { hideModal, showModal } from '../../store/modalSlice';
 import { useAppSelector } from '../../store/store';
 
+import styles from './ModalPortal.module.scss';
+
 const ModalPortal: FC = () => {
-   const footer = document.querySelector('.ant-layout-footer');
+   const rootContainer = document.getElementById('root');
+
    const dispatch = useDispatch();
+   
+   const { activeModal, modalData } = useAppSelector((state) => state.modal);
+   const { isComplete } = useAppSelector((state) => state.crime);
 
-   const currModalType: modalType = useAppSelector((state) => state.modal.activeModal);
-   const modalData: string | null = useAppSelector((state) => state.modal.modalData);
+   if (!activeModal || !rootContainer) return null;
 
-   if (!currModalType || !footer) return null;
+   const handleCloseButton = () => {
+      if (isComplete && activeModal === 'hint') {
+         dispatch(showModal({ activeModal: 'completeScene' }));
+         return;
+      }
+      
+      dispatch(hideModal());
+   }
 
    const displayMessage = () => {
-      switch (currModalType) {
+      switch (activeModal) {
          case 'completeScene': 
             return <p>Дело успешно раскрыто!</p>;
          case 'hint':
@@ -35,12 +46,13 @@ const ModalPortal: FC = () => {
    }
 
    return createPortal(
-      <div onClick={() => dispatch(hideModal())}>
-         <div onClick={(e) => e.stopPropagation()}>
+      <Flex onClick={() => dispatch(hideModal())} className={styles.modalOverlay}>
+         <Flex onClick={(e) => e.stopPropagation()} className={styles.modalContainer}>
+            <Button onClick={handleCloseButton} className={styles.modalButton}>X</Button>
             {displayMessage()}
-         </div>
-      </div>, 
-   footer)
+         </Flex>
+      </Flex>, 
+   rootContainer)
 }
 
 export default ModalPortal;
