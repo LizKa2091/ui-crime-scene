@@ -15,7 +15,7 @@ const HomePage: FC = () => {
       dispatch(showModal({ activeModal: 'about' }));
    }, [dispatch]);
 
-   return (git
+   return (
       <Flex justify='center' align='center'>
          {scene && 
             <Flex vertical align='center' gap='large'>
