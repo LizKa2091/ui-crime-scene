@@ -1,0 +1,26 @@
+.modal {
+   &Overlay {
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      color: #000;
+
+      .modalContainer {
+         background-color: #001529;
+         border-radius: 16px;
+         color: #fff;
+         padding: 50px;
+         position: relative;
+      }
+      .modalButton {
+         position: absolute;
+         right: 15px;
+         top: 15px;
+         width: 35px;
+         height: 35px;
+      }
+   }
+}

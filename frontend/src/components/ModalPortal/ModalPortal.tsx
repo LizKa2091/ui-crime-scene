@@ -1,20 +1,27 @@
 import { type FC } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
-import { Flex } from 'antd';
+import { Button, Flex } from 'antd';
 
 import { hideModal } from '../../store/modalSlice';
 import { type modalType } from '../../types/modalTypes';
 import { useAppSelector } from '../../store/store';
 
+import styles from './ModalPortal.module.scss';
+
 const ModalPortal: FC = () => {
-   const footer = document.querySelector('.ant-layout-footer');
+   const rootContainer = document.getElementById('root');
+
    const dispatch = useDispatch();
 
    const currModalType: modalType = useAppSelector((state) => state.modal.activeModal);
    const modalData: string | null = useAppSelector((state) => state.modal.modalData);
 
-   if (!currModalType || !footer) return null;
+   if (!currModalType || !rootContainer) return null;
+
+   const handleClose = () => {
+      dispatch(hideModal())
+   }
 
    const displayMessage = () => {
       switch (currModalType) {
@@ -35,12 +42,13 @@ const ModalPortal: FC = () => {
    }
 
    return createPortal(
-      <div onClick={() => dispatch(hideModal())}>
-         <div onClick={(e) => e.stopPropagation()}>
+      <Flex onClick={handleClose} className={styles.modalOverlay}>
+         <Flex onClick={(e) => e.stopPropagation()} className={styles.modalContainer}>
+            <Button onClick={handleClose} className={styles.modalButton}>X</Button>
             {displayMessage()}
-         </div>
-      </div>, 
-   footer)
+         </Flex>
+      </Flex>, 
+   rootContainer)
 }
 
 export default ModalPortal;
