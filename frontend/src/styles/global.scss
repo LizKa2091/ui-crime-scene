@@ -8,8 +8,15 @@
    width: clamp(200px, 100%, 500px);
 }
 
+#root {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
 .ant-layout-content {
    display: flex;
+   flex: 1;
    justify-content: center;
    align-items: center;
    padding: 25px 0;
