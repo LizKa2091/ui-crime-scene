@@ -90,22 +90,17 @@ export const crimeErrors: Record<string, IErrorItem[]> = {
          description: 'Основная кнопка CTA почти не видна на фоне — нарушен принцип визуальной иерархии.'
       },
       {
-         id: 2, // "broken-grid"
-         element: 'features',
-         description: 'Блок с преимуществами съехал: отступы и выравнивание нарушены — дезориентирует пользователя.'
-      },
-      {
-         id: 3, // "bad-placeholder"
+         id: 2, // "bad-placeholder"
          element: 'subscribe-input',
          description: 'Поле ввода с плейсхолдером “Type something…” — не объясняет, что именно вводить. Нарушен принцип явности.'
       },
       {
-         id: 4, // "icon-only-button"
+         id: 3, // "icon-only-button"
          element: 'subscribe-button',
          description: 'Кнопка отправки — просто стрелка без подписи. Непонятно, что она делает.'
       },
       {
-         id: 5, // "tiny-footer-text"
+         id: 4, // "tiny-footer-text"
          element: 'footer',
          description: 'Текст в футере слишком мелкий и с низким контрастом — неудобно читать.'
       }
