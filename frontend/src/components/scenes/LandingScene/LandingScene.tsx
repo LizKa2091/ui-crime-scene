@@ -1,20 +1,18 @@
 import { type FC } from 'react';
 import { Button, Input, Flex, Card } from 'antd';
 import { Footer } from 'antd/es/layout/layout';
+import { SendOutlined } from '@ant-design/icons';
 
 import CrimeHint from '../../CrimeHint/CrimeHint';
 
 import styles from './LandingScene.module.scss';
-import { SendOutlined } from '@ant-design/icons';
 
 const LandingScene: FC = () => {
    return (
       <Flex vertical align='center' justify='center' gap='large' className={styles.landingContainer}>
          <Flex vertical align='center' justify='center' gap='small'>
             <h1>Super UX Product</h1>
-            <CrimeHint 
-               errorId={1}
-            >
+            <CrimeHint errorId={1}>
                <Button type="primary" className={styles.landingButton}>
                   Попробовать
                </Button>
@@ -32,15 +30,11 @@ const LandingScene: FC = () => {
          <Flex vertical align='center' justify='center' gap='small'>
             <h3>Подпишитесь на новости</h3>
             <Flex gap="small" justify="center">
-               <CrimeHint 
-                  errorId={2}
-               >
+               <CrimeHint errorId={2}>
                   <Input placeholder="Type something..." />
                </CrimeHint>
 
-               <CrimeHint 
-                  errorId={3}
-               >
+               <CrimeHint errorId={3}>
                   <Button shape="circle" icon={<SendOutlined />} />
                </CrimeHint>
             </Flex>
