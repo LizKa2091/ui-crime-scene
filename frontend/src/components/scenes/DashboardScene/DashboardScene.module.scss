@@ -1,0 +1,41 @@
+.dashboardLayout {
+   height: 100%;
+   background-color: #111;
+   color: #eee;
+}
+
+.content {
+   padding: 24px;
+}
+
+.topButtons {
+   margin-bottom: 16px;
+}
+
+.tableContainer {
+   background: #1a1a1a;
+   border: 1px solid #333;
+   color: #fff;
+   margin-bottom: 24px;
+
+   :global {
+      .ant-card-head-title {
+         color: #fff;
+      }
+   }
+}
+
+.chartContainer {
+   border: 1px solid #444;
+   height: 180px;
+   overflow: auto;
+   background: #222;
+}
+
+.fakeChart {
+   height: 300px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #aaa;
+}
