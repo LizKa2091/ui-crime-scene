@@ -1,4 +1,4 @@
-import { useEffect, type FC } from 'react';
+import { type FC } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { Button, Flex } from 'antd';
