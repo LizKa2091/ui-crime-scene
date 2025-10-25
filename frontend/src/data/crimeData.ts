@@ -53,5 +53,56 @@ export const crimeErrors: Record<string, IErrorItem[]> = {
          element: 'header',
          description: 'На странице блога нет поиска — ухудшает навигацию по контенту.'
       }
+   ],
+
+   dashboard: [
+      {
+         id: 1, // "overloaded-sidebar"
+         element: 'sidebar',
+         description: 'Сайдбар перегружен пунктами без визуальной иерархии — пользователю сложно ориентироваться.'
+      },
+      {
+         id: 2, // "unclear-icons"
+         element: 'top-buttons',
+         description: 'Кнопки без подписей — непонятно, что они делают. UX-преступление против ясности.'
+      },
+      {
+         id: 3, // "no-empty-state"
+         element: 'table',
+         description: 'При отсутствии данных таблица пуста без пояснения (“Нет проектов”) — нарушен принцип информативной обратной связи.'
+      },
+      {
+         id: 4, // "color-only-status"
+         element: 'status-badges',
+         description: 'Статусы задач различаются только по цвету — недоступно для людей с дальтонизмом (нарушение WCAG).'
+      },
+      {
+         id: 5, // "scroll-within-scroll"
+         element: 'chart-container',
+         description: 'Виджет статистики прокручивается внутри страницы — двойной скролл ломает UX.'
+      }
+   ],
+   
+   landing: [
+      {
+         id: 1, // "weak-cta-contrast"
+         element: 'hero-button',
+         description: 'Основная кнопка CTA почти не видна на фоне — нарушен принцип визуальной иерархии.'
+      },
+      {
+         id: 2, // "bad-placeholder"
+         element: 'subscribe-input',
+         description: 'Поле ввода с плейсхолдером “Type something…” — не объясняет, что именно вводить. Нарушен принцип явности.'
+      },
+      {
+         id: 3, // "icon-only-button"
+         element: 'subscribe-button',
+         description: 'Кнопка отправки — просто стрелка без подписи. Непонятно, что она делает.'
+      },
+      {
+         id: 4, // "tiny-footer-text"
+         element: 'footer',
+         description: 'Текст в футере слишком мелкий и с низким контрастом — неудобно читать.'
+      }
    ]
 };

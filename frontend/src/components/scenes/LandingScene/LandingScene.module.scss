@@ -1,0 +1,17 @@
+.landing{
+   &Container {
+      width: 100%;
+   }
+   &Button {
+      background: #202020;
+      border: none;
+      color: #444;
+   }
+}
+
+.footer {
+   margin-top: 50px;
+   font-size: 10px;
+   text-align: center;
+   width: 100vw;
+}

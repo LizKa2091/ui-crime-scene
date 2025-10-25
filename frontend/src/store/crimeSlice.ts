@@ -10,7 +10,9 @@ const initialState: ICrimeState = {
    scenesProgress: [
       { id: 1, sceneName: 'login', status: 'new' },
       { id: 2, sceneName: 'shop', status: 'new' },
-      { id: 3, sceneName: 'blog', status: 'new' }
+      { id: 3, sceneName: 'blog', status: 'new' },
+      { id: 4, sceneName: 'dashboard', status: 'new' },
+      { id: 5, sceneName: 'landing', status: 'new' },
    ],
    isComplete: false
 };
