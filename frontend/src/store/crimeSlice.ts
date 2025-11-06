@@ -1,19 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { ICrimeState } from '../types/crimeTypes';
 import { crimeErrors } from '../data/crimeData';
+import { loadCrimeProgress, saveCrimeProgress } from '../utils/crimeStorage';
+
+const initialScenes = [
+   { id: 1, sceneName: 'login', status: 'new' },
+   { id: 2, sceneName: 'shop', status: 'new' },
+   { id: 3, sceneName: 'blog', status: 'new' },
+   { id: 4, sceneName: 'dashboard', status: 'new' },
+   { id: 5, sceneName: 'landing', status: 'new' }
+];
+
+const savedScenes = loadCrimeProgress();
 
 const initialState: ICrimeState = {
    currScene: null,
    errors: [],
    foundErrors: [],
    foundCount: 0,
-   scenesProgress: [
-      { id: 1, sceneName: 'login', status: 'new' },
-      { id: 2, sceneName: 'shop', status: 'new' },
-      { id: 3, sceneName: 'blog', status: 'new' },
-      { id: 4, sceneName: 'dashboard', status: 'new' },
-      { id: 5, sceneName: 'landing', status: 'new' },
-   ],
+   scenesProgress: savedScenes || initialScenes,
    isComplete: false
 };
 
@@ -36,6 +41,8 @@ const crimeSlice = createSlice({
          const scene = state.scenesProgress.find((scene) => scene.id === sceneId);
 
          if (scene) scene.status = 'in progress';
+
+         saveCrimeProgress(state.scenesProgress);
       },
       markFoundError: (state, action) => {
          const { errorId } = action.payload;
@@ -57,12 +64,16 @@ const crimeSlice = createSlice({
                if (scene) scene.status = 'complete';
             }
          }
+
+         saveCrimeProgress(state.scenesProgress);
       },
       resetScene: (state) => {
          state.currScene = null;
          state.errors = [];
          state.foundErrors = [];
          state.isComplete = false;
+
+         saveCrimeProgress(state.scenesProgress);
       }
    }
 });
