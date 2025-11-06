@@ -4,22 +4,18 @@ import type { ISceneProgress } from "../types/crimeTypes";
 export const useScenesProgress = () => {
    const { scenesProgress } = useAppSelector((state) => state.crime);
 
-   if (Object.keys(scenesProgress).length) {
-      let lastActiveScene: ISceneProgress | null = null;
-      let isAllComplete: boolean = true;
+   if (!scenesProgress || !scenesProgress.length) return null;
 
-      scenesProgress.forEach(scene => {
-         if (scene.status !== 'complete') {
-            isAllComplete = false;
-         }
+   const activeScenes: ISceneProgress[] = scenesProgress.filter((scene) => scene.status !== "complete");
 
-         if (scene.status === 'in progress') {
-            lastActiveScene = scene;
-         }
-      });
-      
-      if (lastActiveScene) return lastActiveScene;
-      else if (isAllComplete) return scenesProgress.at(-1);
-      else return scenesProgress[0];
-   }
+   const hasProgress: boolean = activeScenes.some((scene) => scene.status !== 'new');
+
+   if (!hasProgress) return activeScenes[0];
+
+   const currentScene: ISceneProgress | undefined = activeScenes.find((scene) => scene.status === "in progress");
+   if (currentScene) return currentScene;
+
+   const nextScene: ISceneProgress | undefined = activeScenes.find((scene) => scene.status === "new");
+   
+   return nextScene || null;
 }
