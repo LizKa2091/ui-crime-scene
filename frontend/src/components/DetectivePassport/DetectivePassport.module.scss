@@ -1,0 +1,31 @@
+.passport {
+   width: 280px;
+   background-color: #1c1c1c;
+   color: #eee;
+   border: 1px solid #333;
+   border-radius: 12px;
+   padding: 20px;
+   box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+   text-align: center;
+}
+
+.rank {
+   color: #ffcc00;
+   font-weight: 600;
+   margin-bottom: 10px;
+}
+
+.completedList {
+   text-align: left;
+   width: 100%;
+   margin-top: 10px;
+
+   ul {
+      padding-left: 20px;
+      
+      li {
+         margin: 4px 0;
+         font-size: 14px;
+      }
+   }
+}
