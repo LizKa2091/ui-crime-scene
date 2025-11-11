@@ -9,6 +9,33 @@
    bottom: 0;
    right: 0;
    padding: 0 25px;
+
+   .displayButtonContainer {
+      justify-content: flex-end;
+
+      :global {
+         .ant-btn {
+            background-color: inherit;
+            border: 0;
+            color: #fff;
+
+            &:hover {
+               background-color: inherit;
+               color: #fff;
+            }
+         }
+      }
+   }
+
+   :global {
+      .ant-progress-text {
+         color: #eee;
+      }
+      .ant-card-body {
+         padding-left: 0 !important;
+         padding-right: 0;
+      }
+   }
 }
 
 .rank {
