@@ -1,8 +1,9 @@
 import { type FC } from 'react';
 import { Progress, Card, Flex } from 'antd';
 import { useAppSelector } from '../../store/store';
-import styles from './DetectivePassport.module.scss';
 import { getDetectiveStats } from '../../utils/getDetectiveStats';
+
+import styles from './DetectivePassport.module.scss';
 
 const DetectivePassport: FC = () => {
    const stats = useAppSelector(getDetectiveStats);
@@ -18,7 +19,7 @@ const DetectivePassport: FC = () => {
             trailColor="#333"
             style={{ width: '100%' }}
          />
-         <p>Раскрыто: {stats.completedAmount} / {stats.totalScenes} ({stats.progressPercent}%)</p>
+         <p>Раскрыто: {stats.completedAmount} / {stats.totalScenes} ({stats.progressPercent}%) сцен</p>
 
          <div className={styles.completedList}>
             <p>Раскрытые сцены:</p>
