@@ -1,0 +1,60 @@
+.passport {
+   background-color: #1c1c1c;
+   color: #eee;
+   border: 1px solid #333;
+   border-radius: 12px;
+   box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+   text-align: center;
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   padding: 0 25px;
+
+   .displayButtonContainer {
+      justify-content: flex-end;
+
+      :global {
+         .ant-btn {
+            background-color: inherit;
+            border: 0;
+            color: #fff;
+
+            &:hover {
+               background-color: inherit;
+               color: #fff;
+            }
+         }
+      }
+   }
+
+   :global {
+      .ant-progress-text {
+         color: #eee;
+      }
+      .ant-card-body {
+         padding-left: 0 !important;
+         padding-right: 0;
+      }
+   }
+}
+
+.rank {
+   color: #ffcc00;
+   font-weight: 600;
+   margin-bottom: 10px;
+}
+
+.completedList {
+   text-align: left;
+   width: 100%;
+   margin-top: 10px;
+
+   ul {
+      padding-left: 20px;
+      
+      li {
+         margin: 4px 0;
+         font-size: 14px;
+      }
+   }
+}
